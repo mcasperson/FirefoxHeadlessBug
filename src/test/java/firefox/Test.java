@@ -3,6 +3,8 @@ package firefox;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 
@@ -15,7 +17,13 @@ public class Test {
 
         final FirefoxBinary firefoxBinary = new FirefoxBinary();
         firefoxBinary.addCommandLineOptions("--headless");
-        final FirefoxOptions firefoxOptions = new FirefoxOptions();
+
+        final DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        capabilities.setCapability("acceptInsecureCerts", true);
+        capabilities.setCapability("disable-popup-blocking", true);
+
+        final FirefoxOptions firefoxOptions = new FirefoxOptions(capabilities);
         firefoxOptions.setBinary(firefoxBinary);
         firefoxOptions.addPreference("network.proxy.http", "localhost");
         firefoxOptions.addPreference("network.proxy.http_port", "8080");
