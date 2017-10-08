@@ -17,6 +17,10 @@ public class Test {
         firefoxBinary.addCommandLineOptions("--headless");
         final FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.setBinary(firefoxBinary);
+        firefoxOptions.addPreference("network.proxy.http", "localhost");
+        firefoxOptions.addPreference("network.proxy.http_port", "8080");
+        firefoxOptions.addPreference("network.proxy.https", "localhost");
+        firefoxOptions.addPreference("network.proxy.https_port", "8080");
         final FirefoxDriver driver = new FirefoxDriver(firefoxOptions);
         driver.quit();
     }
